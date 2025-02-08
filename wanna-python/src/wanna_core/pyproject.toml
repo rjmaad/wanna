@@ -1,0 +1,21 @@
+[project]
+name = "wanna-core"
+version = "0.1.0"
+description = "Wanna Core Functionality"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "neo4j>=5.28.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
+
+[tool.ruff.lint]
+select = ["I001"] # Import Sorting
