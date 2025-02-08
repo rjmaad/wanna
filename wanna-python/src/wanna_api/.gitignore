@@ -1,0 +1,6 @@
+# Ignore our environment file so we don't upload auth thingys to git
+.env
+
+# Ignore vscode and other dev cache things
+.vscode/
+__pycache__/

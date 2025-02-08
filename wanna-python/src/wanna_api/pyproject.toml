@@ -1,0 +1,30 @@
+[project]
+name = "wanna-api"
+version = "0.1.0"
+description = "Wanna Base API"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.1.6",
+    "neo4j>=5.28.0",
+    "uvicorn>=0.34.0",
+]
+
+[project.scripts]
+wanna_api = "wanna_api.asgi:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-django>=4.9.0",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "wanna_api.settings"
+
+[tool.ruff.lint]
+select = ["I001"] # Import Sorting
