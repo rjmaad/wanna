@@ -5,10 +5,14 @@ description = "Wanna Base API"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "wanna_core",
     "django>=5.1.6",
     "neo4j>=5.28.0",
     "uvicorn>=0.34.0",
 ]
+
+[tool.uv.sources]
+wanna_core = { path = "../wanna_core", editable = true }
 
 [project.scripts]
 wanna_api = "wanna_api.asgi:main"

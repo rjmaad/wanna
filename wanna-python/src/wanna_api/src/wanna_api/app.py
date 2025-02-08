@@ -1,22 +1,17 @@
 import logging
 import os
-from typing import NamedTuple
 
 import django
 from django.core.asgi import get_asgi_application
 from django.http import JsonResponse
 from neo4j import GraphDatabase
 
+from wanna_core.db import DBAuth
+
 LOG = logging.getLogger(__name__)
 
 _HOME_MESSAGE = "Hello, from the async Wanna API's home endpoint 🏠!"
 _URI = os.environ["WANNA_DB_URI"]
-
-
-class DBAuth(NamedTuple):
-    username: str
-    password: str
-
 
 _AUTH = DBAuth(os.environ["WANNA_DB_USERNAME"], os.environ["WANNA_DB_PASSWORD"])
 
