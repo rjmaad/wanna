@@ -5,6 +5,7 @@ description = "Wanna Core Functionality"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "geopandas>=1.0.1",
     "neo4j>=5.28.0",
 ]
 
