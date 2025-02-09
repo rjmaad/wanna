@@ -4,9 +4,7 @@ import os
 import django
 from django.core.asgi import get_asgi_application
 from django.http import JsonResponse
-from neo4j import GraphDatabase
-
-from wanna_core.db import DBAuth
+from wanna_core.db import DBAuth, Neo4JDatabase
 
 LOG = logging.getLogger(__name__)
 
@@ -21,11 +19,6 @@ django.setup()
 app = get_asgi_application()
 
 
-def create_user(tx, username, password):
-    query = "CREATE (p:User {username: $username, password: $password})"
-    tx.run(query, username=username, password=password)
-
-
 async def home(request):
     """Basic Home Endpoint."""
     return JsonResponse({"message": _HOME_MESSAGE})
@@ -38,11 +31,8 @@ async def create_account(request):
         data = request.body
 
         # Add our user data to our neo4j database as a new user node
-        # TODO: clean this stuff up and move it into new library ``wanna_core``
-        with GraphDatabase.driver(_URI, auth=_AUTH) as driver:
-            driver.verify_connectivity()
-            with driver.session() as session:
-                session.execute_write(create_user, data["username"], data["password"])
+        database = Neo4JDatabase(_URI, _AUTH)
+        database.create_user(data["username"], data["password"])
 
         # Return JSON response that our account was created
         msg = f"Account for user: {data['username']}"
